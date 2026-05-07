@@ -1,0 +1,2840 @@
+{
+  "meta": {
+    "updated": "2026-05-07",
+    "note": "Deilanleg JSON-útgáfa. parties.py er kanónísk uppspretta. Endurgenerera með Python skript.",
+    "twelve_axis_labels": {
+      "velferd": "Velferð og félagsleg þjónusta",
+      "skattar": "Skattar, gjöld og fjármál borgarinnar",
+      "bilar": "Bílar, bílastæði og umferð",
+      "borgarlina": "Borgarlína og almenningssamgöngur",
+      "husnaedi": "Húsnæðisuppbygging og þétting byggðar",
+      "loftslag": "Loftslag, náttúra og græn svæði",
+      "skolar": "Skólar, leikskólar og fjölskyldumál",
+      "eldri": "Eldri borgarar",
+      "atvinnu": "Atvinnulíf, nýsköpun og skilvirkni",
+      "lydraedi": "Lýðræði, gagnsæi og íbúasamráð",
+      "innflytjendur": "Innflytjendamál, mannréttindi og inngilding",
+      "menning": "Menning, íþróttir og frístundir"
+    }
+  },
+  "parties": [
+    {
+      "list_letter": "A",
+      "name": "Vinstrihreyfingin – grænt framboð",
+      "short_name": "Vinstrið",
+      "color": "#2E7D32",
+      "website": "https://vinstrid.is/",
+      "policy_url": "https://vinstrid.is/",
+      "logo": "assets/logos/a-vinstrid.png",
+      "summary": "Húsnæði sem félagslegur réttur, sterk loftslags- og samgöngustefna, öflug almannaþjónusta og inngilding. Skeptísk gagnvart einkavæðingu og spákaupmennsku á húsnæðismarkaði.",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá vinstrid.is. Stefnan er rekstrarlega samfelld; húsnæði er meðhöndlað sem félagslegur réttur.",
+      "sources": [
+        "https://vinstrid.is/"
+      ],
+      "overall_certainty": "high",
+      "evidence_score": 0.955,
+      "uncertain_axes_12": [],
+      "twelve_axis_scores": {
+        "velferd": 2,
+        "skattar": 1,
+        "bilar": -2,
+        "borgarlina": 2,
+        "husnaedi": 2,
+        "loftslag": 2,
+        "skolar": 1,
+        "eldri": 1,
+        "atvinnu": -1,
+        "lydraedi": 1,
+        "innflytjendur": 2,
+        "menning": 2
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterkur stuðningur við Borgarlínu — almenningssamgöngur kjarnaverkefni.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Áhersla á virkar samgöngur, hjólastíga og göngugötur.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Andstaða við forgang einkabíla á kostnað virkra og almenningssamgangna.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Þétting byggðar tengd loftslags-, samgöngu- og inngildingar-markmiðum.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Andstaða við útþenslu sem skapar bíla-háða úthverfa-byggð.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Húsnæði meðhöndlað sem félagslegur réttur — sterkari opinber/óhagnaðardrifin hlutverki, andstaða við spákaupmennsku á húsnæðismarkaði.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": -1,
+          "certainty": "high",
+          "reason": "Andstaða við skattalækkanir á kostnað velferðar; vill nota borgarsjóð til fjárfestinga.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Velferðarþjónusta er kjarni stefnunnar.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": -1,
+          "certainty": "high",
+          "reason": "Skeptísk gagnvart útvistun og einkavæðingu kjarna-þjónustu.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Loftslagsmarkmið móta skipulags- og samgönguákvarðanir.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk áhersla á inngildingu, mannréttindi og þjónustu við innflytjendur.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "high",
+          "reason": "Stuðningur við aukið íbúasamráð og áhrif íbúa á borgarmál.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk áhersla á einföldun stjórnsýslu — ekki andstæð, ekki drifkraftur.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "high",
+          "reason": "Stuðningur við leik- og grunnskóla, hluti af velferðar-fókus.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "high",
+          "reason": "Þjónusta við eldri borgara hluti af kjarnastefnu velferðar.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Stuðningur við menningu og listir sem hluta af samfélagsuppbyggingu.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterkur opinber rekstur er kjarnaprinsíp; andstaða við einkavæðingu þjónustu.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": -1,
+          "certainty": "high",
+          "reason": "Skeptísk gagnvart því að atvinnulíf og markaður stýri ákvörðunum borgarinnar.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Vernd grænna svæða er hluti af loftslags- og umhverfisáherslu.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Viðhald hluti af velferðarfókus en ekki stærsta sérstaða.",
+          "sources": [
+            "https://vinstrid.is/"
+          ]
+        }
+      }
+    },
+    {
+      "list_letter": "B",
+      "name": "Framsóknarflokkurinn",
+      "short_name": "Framsókn",
+      "color": "#7B6E3B",
+      "website": "https://www.framsoknrvk.is/",
+      "policy_url": "https://www.framsoknrvk.is/",
+      "logo": "assets/logos/b-framsokn.png",
+      "summary": "Praktísk miðjustjórnun með áherslu á börn, fjölskyldur, eldri borgara, hverfaþjónustu og smurta borgarrekstur. „Reykjavík á grænu ljósi“ er kjarna-frasinn — minna ideologi, meira praktík.",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá framsoknrvk.is og umfjöllun RÚV (29. apríl).",
+      "sources": [
+        "https://www.framsoknrvk.is/",
+        "https://www.framsokn.is/sveitarfelog/reykjavik",
+        "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+      ],
+      "overall_certainty": "medium",
+      "evidence_score": 0.618,
+      "uncertain_axes_12": [],
+      "twelve_axis_scores": {
+        "velferd": 1,
+        "skattar": 0,
+        "bilar": 1,
+        "borgarlina": 1,
+        "husnaedi": 1,
+        "loftslag": 1,
+        "skolar": 2,
+        "eldri": 2,
+        "atvinnu": 1,
+        "lydraedi": 1,
+        "innflytjendur": 1,
+        "menning": 1
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hóflegur stuðningur við bættar samgöngur — hvorki andstaða né sterk talsmaður.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við virkar samgöngur sem hluta af jafnvægi.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Jafnvægi milli bíla og virkra samgangna; engin sterk afstaða.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hóflegur stuðningur við þéttingu sem hluta af húsnæðisuppbyggingu.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk afstaða — opin fyrir blönduðu mynstri.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hóflegur stuðningur við opinber/óhagnaðardrifin húsnæði.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Hófsöm afstaða — hvorki útþensla útgjalda né niðurskurður.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hóflegur stuðningur, með hverfaþjónustu og fjölskyldumál í forgangi.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin ákveðin afstaða — opin fyrir samvinnu þvert á geira.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hófleg loftslagsáhersla — „grænt ljós“-frasinn bendir á blandaða nálgun.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hóflegt inngildingar-viðhorf í samræmi við miðjuímynd.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hverfa- og íbúasamráð sem hluti af praktískri stjórnsýslu.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Áhersla á smurta borgarrekstur og að einfalda daglegt líf.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk áhersla á börn, fjölskyldur og hverfaþjónustu — kjarnaforgangur.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Þjónusta við eldri borgara í forgangi, sambærilegt fjölskyldumálum.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hófleg menningar-áhersla — hluti af lífsgæða-fókus hverfa.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk afstaða — opin fyrir samvinnu þvert á geira.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hófleg atvinnu-áhersla sem hluti af jafnvægisáherslu.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Áhersla á græn svæði sem hluta af lífsgæðum hverfa.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "„Reykjavík á grænu ljósi“ — kjarni framboðs er smurð borgarrekstur.",
+          "sources": [
+            "https://www.framsoknrvk.is/",
+            "https://www.framsokn.is/sveitarfelog/reykjavik",
+            "https://www.ruv.is/frettir/innlent/2026-04-29-framsokn-bodar-reykjavik-a-graenu-ljosi"
+          ]
+        }
+      }
+    },
+    {
+      "list_letter": "C",
+      "name": "Viðreisn",
+      "short_name": "Viðreisn",
+      "color": "#F2A93B",
+      "website": "https://www.vidreisnreykjavik.is/",
+      "policy_url": "https://www.vidreisnreykjavik.is/stefna",
+      "logo": "assets/logos/c-vidreisn.png",
+      "summary": "Liberal-praktísk borgarstjórnun: kortershverfi (15-mín-borg), sjálfbærar samgöngur, einföldun stjórnsýslu, frjálslynt inngildingar-viðhorf og modern european city governance.",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá vidreisnreykjavik.is.",
+      "sources": [
+        "https://www.vidreisnreykjavik.is/stefna",
+        "https://vidreisn.is/reykjavik/"
+      ],
+      "overall_certainty": "high",
+      "evidence_score": 0.775,
+      "uncertain_axes_12": [],
+      "twelve_axis_scores": {
+        "velferd": 1,
+        "skattar": -1,
+        "bilar": -1,
+        "borgarlina": 2,
+        "husnaedi": 2,
+        "loftslag": 2,
+        "skolar": 1,
+        "eldri": 0,
+        "atvinnu": 2,
+        "lydraedi": 1,
+        "innflytjendur": 2,
+        "menning": 1
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Skýr stuðningur við Borgarlínu og kortershverfi.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Áhersla á virkar samgöngur sem hluta af 15-mín-borg.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skipulags-pragmatísk afstaða — minni car-centric en hægri-flokkar.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Stuðningur við þétt service-accessible urbanism og einföldun uppbyggingar.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skeptísk gagnvart útþenslu — vill nýta núverandi byggð betur.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við blandað kerfi, ekki anti-market.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Áhersla á efficiency, fewer managers, ekki full austerity.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við sterka borgarþjónustu en ekki municipal-expansionist.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Pro-business modernization — auðveldari rekstrar-umhverfi atvinnulífs.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sjálfbærni samþætt í skipulags-fílósófíu og samgöngum.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Frjálslynd, jafnræðis-, og inngildingar-áhersla.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Liberal-praktísk áhersla á aðgengi og íbúasamráð.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk áhersla á minni skrifræði og einfaldari stjórnsýslu.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við skóla og fjölskyldumál sem hluta af lífsgæðum.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Stuðningur en ekki helsta sérstaða.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hófleg áhersla, hluti af modern-cosmopolitan identitet.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": -1,
+          "certainty": "high",
+          "reason": "Skeptísk gagnvart sterkum opinberum rekstri — efficiency-first.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Skýr business-friendly municipal governance.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Vernd grænna svæða hluti af sjálfbærni-fókus.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hluti af modern city governance — ekki helsta sérstaða.",
+          "sources": [
+            "https://www.vidreisnreykjavik.is/stefna",
+            "https://vidreisn.is/reykjavik/"
+          ]
+        }
+      }
+    },
+    {
+      "list_letter": "D",
+      "name": "Sjálfstæðisflokkurinn",
+      "short_name": "Sjálfstæðisflokkur",
+      "color": "#1F4E8C",
+      "website": "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+      "policy_url": "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+      "logo": "assets/logos/d-sjalfstaedisflokkur.png",
+      "summary": "Borgaraleg fjárhagsleg stjórnsýsla: aðhald, einkareksturs-vænn rekstur, anti-bureaucracy, áhersla á aðgengi einkabíla og pro-housing-supply með markaðs-driven framework. Innri ágreiningur um Borgarlínu.",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá xd.is/reykjavikurborg.",
+      "sources": [
+        "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+        "https://xd.is/stefnan/"
+      ],
+      "overall_certainty": "high",
+      "evidence_score": 0.665,
+      "uncertain_axes_12": [
+        "innflytjendur"
+      ],
+      "twelve_axis_scores": {
+        "velferd": 0,
+        "skattar": -2,
+        "bilar": 2,
+        "borgarlina": -1,
+        "husnaedi": 1,
+        "loftslag": 0,
+        "skolar": 1,
+        "eldri": 1,
+        "atvinnu": 2,
+        "lydraedi": 0,
+        "innflytjendur": 0,
+        "menning": -1
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skeptísk gagnvart núverandi útfærslu Borgarlínu — innri ágreiningur viðurkenndur.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Hlutlaus til hógvær — ekki andstæð, ekki drifkraftur.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Skýr áhersla á aðgengi einkabíla og bílastæði.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við hraða uppbyggingu með market-driven framework.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hófleg afstaða — opin fyrir markaðsdrifinn supply.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skeptísk gagnvart þenslu opinbers húsnæðis.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk áhersla á aðhald, lægri gjöld, anti-bureaucratic.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Ekki andstæð velferð — efficiency-first nálgun.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterkt pro-private og útvistun þar sem það á við.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Acknowledged en secondary — practicality first.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": 0,
+          "certainty": "low",
+          "reason": "Lítil municipal-specific stefna — meira nationally-oriented.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk umbóta-áhersla.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk anti-bureaucratic positioning.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við skóla og fjölskyldumál — hluti af kjarnaþjónustu.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hóflegur stuðningur, hluti af kjarnaþjónustu.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Ekki sterk áhersla.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Skýrt anti-strong-public-role; einkamarkaður leysir flest.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Skýrt business-friendly municipal governance.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Hófleg afstaða — ekki primary.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hluti af kjarnaþjónustu en ekki helsta sérstaða.",
+          "sources": [
+            "https://xd.is/sveitarstjornarkosningar/reykjavikurborg/",
+            "https://xd.is/stefnan/"
+          ]
+        }
+      }
+    },
+    {
+      "list_letter": "F",
+      "name": "Flokkur fólksins",
+      "short_name": "Flokkur fólksins",
+      "color": "#E55A2B",
+      "website": "https://flokkurfolksins.is/reykjavik/",
+      "policy_url": "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+      "logo": "assets/logos/f-flokkur-folksins.png",
+      "summary": "Velferðar-populískur framboð: eldri borgarar í forgangi, viðkvæmir hópar, húsnæðisöryggi, „mannlegri“ skipulag (gegn ofurþéttingu), praktísk daglega þjónusta. Anti-bureaucratic en ekki austerity.",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá flokkurfolksins.is/reykjavik.",
+      "sources": [
+        "https://flokkurfolksins.is/reykjavik/",
+        "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+        "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+      ],
+      "overall_certainty": "medium",
+      "evidence_score": 0.558,
+      "uncertain_axes_12": [
+        "loftslag",
+        "innflytjendur",
+        "menning"
+      ],
+      "twelve_axis_scores": {
+        "velferd": 2,
+        "skattar": 0,
+        "bilar": 1,
+        "borgarlina": -1,
+        "husnaedi": 0,
+        "loftslag": 0,
+        "skolar": 1,
+        "eldri": 2,
+        "atvinnu": 0,
+        "lydraedi": 1,
+        "innflytjendur": 0,
+        "menning": -1
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skeptísk en ekki eins sterk og Okkar borg eða Miðflokkurinn.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Hófleg skeptísk — ekki primary.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "medium",
+          "reason": "Stuðningur við aðgengi bíla í daglegu lífi, parking accessibility.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Gagnrýnir „ofurþéttingu“ en styður mannlegri skipulag.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk afstaða — opin fyrir blönduðu mynstri.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við húsnæðisöryggi og affordable supply.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Ekki niðurskurðar-flokkur, áhersla á ráðdeild.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Velferð er sterkasti kjarni framboðsins.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk afstaða.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": 0,
+          "certainty": "low",
+          "reason": "Ekki primary identity — secondary concern.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": 0,
+          "certainty": "low",
+          "reason": "Ekki sterk municipal-policy specificity.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Populískt-praktísk áhersla, anti-system rhetoric.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Áhersla á einfalda ferla fyrir borgara.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur, hófleg áhersla — eldri borgarar eru sterkari.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Eldri borgarar sem fyrsti forgangur — kjarni framboðsins.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": -1,
+          "certainty": "low",
+          "reason": "Ekki áhersla — kjarnaþjónusta í forgangi.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk afstaða — service-focus, ekki ideologi.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk afstaða.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Stuðningur en ekki primary.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Praktísk daglega þjónusta og kjarnastoðir hverfa.",
+          "sources": [
+            "https://flokkurfolksins.is/reykjavik/",
+            "https://flokkurfolksins.is/reykjavik/aherslumal.html",
+            "https://www.ruv.is/frettir/innlent/2026-04-24-flokkur-folksins-kynnir-aherslumalin-i-borginni"
+          ]
+        }
+      }
+    },
+    {
+      "list_letter": "G",
+      "name": "Góðan daginn",
+      "short_name": "Góðan daginn",
+      "color": "#9C8DC4",
+      "website": "https://gdf.is/",
+      "policy_url": "https://gdf.is/stefnumalin/",
+      "logo": "assets/logos/g-godan-daginn.png",
+      "summary": "Praktísk borgarrekstur, aðhald og einföld stjórnsýsla. Skólar og fjölskyldur í forgangi, atvinnulíf og íbúasamráð sem kjarnaprinsíp. Skeptísk gagnvart dýrum samgönguverkefnum og hugmyndafræðimiðuðu skipulagi.",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá gdf.is/stefnumalin/. Áður var allt merkt óvíst — nú er stærsti hluti ása staðfestur. Innflytjenda- og menningar-ásar eru þó enn lágvissir.",
+      "sources": [
+        "https://gdf.is/stefnumalin/"
+      ],
+      "overall_certainty": "medium",
+      "evidence_score": 0.605,
+      "uncertain_axes_12": [
+        "innflytjendur",
+        "menning"
+      ],
+      "twelve_axis_scores": {
+        "velferd": 1,
+        "skattar": -2,
+        "bilar": 1,
+        "borgarlina": -1,
+        "husnaedi": -1,
+        "loftslag": 0,
+        "skolar": 2,
+        "eldri": 2,
+        "atvinnu": 2,
+        "lydraedi": 2,
+        "innflytjendur": 0,
+        "menning": 0
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Efahyggja gagnvart dýrum samgönguverkefnum og hugmyndafræðimiðuðu skipulagi, en ekki andstæð almenningssamgöngum almennt.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": 0,
+          "certainty": "low",
+          "reason": "Engar áberandi yfirlýsingar í sjáanlegri stefnuskrá.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Áhersla á aðgengi og praktískar lausnir í daglegri umferð.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skeptísk gagnvart þéttingu sem sjálfsmarkmiði.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Áhersla á fjölskylduvænleg úthverfi og fjölbreytni í byggðamynstri.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": 0,
+          "certainty": "low",
+          "reason": "Ekki sterk afstaða — ráðast af verkefnum og praktísku mati.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Skýr áhersla á aðhald í rekstri og lækkun skatta og gjalda.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við velferð innan rammans, hluti af kjarnaþjónustu — ekki útþensla.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hógvær opnun fyrir aðkomu einkageirans í þjónustu þar sem það á við.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk loftslagsáhersla — ekki andstæð, ekki drifkraftur skipulagsákvarðana.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": 0,
+          "certainty": "low",
+          "reason": "Engin áberandi afstaða innan stefnuskrárinnar.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Áhersla á íbúasamráð og þátttöku íbúa í ákvörðunum.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Lykiláhersla — einfalda stjórnsýslu og minnka skrifræði.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Skólar og fjölskyldur sem helsti forgangur.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "medium",
+          "reason": "Áhersla á örugga grunnþjónustu fyrir eldri borgara.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": 0,
+          "certainty": "low",
+          "reason": "Ekki áberandi áhersla.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Áhersla á rekstrarhagkvæmni — opin fyrir samvinnu þvert á einka- og opinbera-geira.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk áhersla á atvinnulíf, samkeppnishæfni og störf.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Áhersla á græn svæði sem hluta af lífsgæðum hverfa.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Lykiláhersla — gæðaviðhald og dagleg þjónusta í forgangi.",
+          "sources": [
+            "https://gdf.is/stefnumalin/"
+          ]
+        }
+      }
+    },
+    {
+      "list_letter": "J",
+      "name": "Sósíalistaflokkur Íslands",
+      "short_name": "Sósíalistar",
+      "color": "#B22222",
+      "website": "https://www.sosialistaflokkurinn.is/",
+      "policy_url": "https://www.sosialistaflokkurinn.is/stefna",
+      "logo": "assets/logos/j-sosialistar.png",
+      "summary": "Demókratísk-sósíalísk munisipalismi: Reykjavík Construction Company, almenningshúsnæði, anti-spákaupmennska, sterkur opinber rekstur, þátttöku-lýðræði og jöfn aðgengi viðkvæmra hópa.",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá sosialistaflokkurinn.is/stefna og borgar-stefnuskrá 2026.",
+      "sources": [
+        "https://www.sosialistaflokkurinn.is/stefna",
+        "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+      ],
+      "overall_certainty": "high",
+      "evidence_score": 0.933,
+      "uncertain_axes_12": [],
+      "twelve_axis_scores": {
+        "velferd": 2,
+        "skattar": 2,
+        "bilar": -2,
+        "borgarlina": 2,
+        "husnaedi": 2,
+        "loftslag": 1,
+        "skolar": 2,
+        "eldri": 2,
+        "atvinnu": -2,
+        "lydraedi": 2,
+        "innflytjendur": 2,
+        "menning": 2
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterkur stuðningur við public transport sem public infrastructure.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Stuðningur við virkar samgöngur og minni bíla-háð.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Skýrt anti-car-priority.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Stuðningur við þéttingu sem hluta af húsnæðis-mannréttindum.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Andstaða við bíla-háð úthverfa-stækkun.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Reykjavík Construction Company, anti-spákaupmennska, public housing er kjarni.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Skýrt anti-skattalækkanir; pro-redistribution.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Velferðar-fyrst — kjarni framboðs.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Skýr anti-privatization, anti-útvistun.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": 2,
+          "certainty": "medium",
+          "reason": "Mikilvægt en ekki primary identity — economic restructuring er kjarni.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk inngilding, social equality, vulnerable rights.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Þátttöku-lýðræði og residenta-empowerment.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Ekki primary — public provision er kjarni.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Skólar, jafn aðgangur, tungumáls-stuðningur, börn innflytjenda.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Heim-aðstoð, virðing eldri borgara, social guarantees.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Stuðningur við menningu og listir sem hluta af samfélagsuppbyggingu.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterkur opinber rekstur sem valdatæki gegn markaði.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Skýrt -2: ekki business-first, public provision er kjarni.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Vernd grænna svæða hluti af municipal-public-good logík.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við daglega þjónustu, hluti af kjarnastoðum.",
+          "sources": [
+            "https://www.sosialistaflokkurinn.is/stefna",
+            "https://www.sosialistaflokkurinn.is/media-kit/stefna/sosialistar-stefnuskra-rvk-2026.pdf"
+          ]
+        }
+      }
+    },
+    {
+      "list_letter": "M",
+      "name": "Miðflokkurinn",
+      "short_name": "Miðflokkurinn",
+      "color": "#16365C",
+      "website": "https://midflokkurinn.is/reykjavik",
+      "policy_url": "https://midflokkurinn.is/reykjavik",
+      "logo": "assets/logos/m-midflokkurinn.png",
+      "summary": "Úthverfa-pragmatísk anti-urbanism: skýr Borgarlínu-andstaða, pro-Sundabraut, pro-bíla-aðgengi, anti-vegtollar/km-skattar, pro-housing-supply með úthverfa-stækkunar logík (anti-density).",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá midflokkurinn.is/reykjavik og samgöngu-stefnu.",
+      "sources": [
+        "https://midflokkurinn.is/reykjavik",
+        "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+        "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+      ],
+      "overall_certainty": "high",
+      "evidence_score": 0.665,
+      "uncertain_axes_12": [
+        "innflytjendur"
+      ],
+      "twelve_axis_scores": {
+        "velferd": 0,
+        "skattar": -2,
+        "bilar": 2,
+        "borgarlina": -2,
+        "husnaedi": -1,
+        "loftslag": -1,
+        "skolar": 0,
+        "eldri": 0,
+        "atvinnu": 1,
+        "lydraedi": 0,
+        "innflytjendur": -1,
+        "menning": -1
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Skýr andstaða við Borgarlínu eins og hún er nú.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skeptísk gagnvart áframhaldandi þrengingar fyrir bílaumferð.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk pro-car accessibility, gegn restrictions.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Anti-density urbanism, en pro-housing supply.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Pro-suburban expansion, pro-Sundabraut, pro-road infrastructure.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skeptísk gagnvart opinberri húsnæðisþenslu.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Anti-skattahækkanir, anti-vegrtollar, anti-km-skattar.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Stuðningur við praktíska velferð en ekki kjarni.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Pro-development og minna skrifræði — ekki technocratic.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Secondary, deprioritized vs. transport practicality.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": -1,
+          "certainty": "low",
+          "reason": "Skarpari national rhetoric en municipal-specific weaker.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk umbóta-áhersla.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Anti-bureaucratic development philosophy.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Hófleg áhersla, ekki kjarnasérstaða.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Stuðningur en ekki primary.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Ekki sterk áhersla.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Skýrt anti-strong-public-role.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Pro-development, en ekki technocratic-business.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Hófleg skeptísk — pro-development tilhneiging.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hluti af pragmatic governance áherslu.",
+          "sources": [
+            "https://midflokkurinn.is/reykjavik",
+            "https://midflokkurinn.is/stefna/samgongumal-sundabraut-og-borgarlina",
+            "https://midflokkurinn.is/midflokkurinn-hefur-lausnir-a-husnaedismarkadi"
+          ]
+        }
+      }
+    },
+    {
+      "list_letter": "P",
+      "name": "Píratar",
+      "short_name": "Píratar",
+      "color": "#3F2E56",
+      "website": "https://piratar.is/bestumborgina2026",
+      "policy_url": "https://piratar.is/bestumborgina2026",
+      "logo": "assets/logos/p-piratar.png",
+      "summary": "Demókratísk-progressíf gagnsæis-umbót: stafræn borgarþjónusta, beint lýðræði, mannréttindi (LGBTQ+, minorities), sjálfbærar samgöngur, loftslags-conscious skipulag — process before ideology.",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá piratar.is/bestumborgina2026 og piratar.is/stefna.",
+      "sources": [
+        "https://piratar.is/bestumborgina2026",
+        "https://piratar.is/stefna"
+      ],
+      "overall_certainty": "high",
+      "evidence_score": 0.733,
+      "uncertain_axes_12": [
+        "skattar"
+      ],
+      "twelve_axis_scores": {
+        "velferd": 1,
+        "skattar": 0,
+        "bilar": -2,
+        "borgarlina": 2,
+        "husnaedi": 1,
+        "loftslag": 2,
+        "skolar": 1,
+        "eldri": 0,
+        "atvinnu": 1,
+        "lydraedi": 2,
+        "innflytjendur": 2,
+        "menning": 2
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Skýr stuðningur við virkar samgöngur og almenningssamgöngur.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sjálfbær mobility — kjarni samgöngustefnu.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Anti-car-dependency, pro-active mobility.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við þéttingu sem hluta af mannréttinda-skipulagi.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skeptísk gagnvart útþenslu.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við sanngirni og aðgengi, ekki anti-market.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": 0,
+          "certainty": "low",
+          "reason": "Engin sterk fjárlaga-stefna — focus á transparency og value.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við aðgengilegar þjónustur, ekki primary.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Engin sterk afstaða — focus á digital reform.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sjálfbærni og loftslags-conscious skipulag.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Mannréttindi, LGBTQ+, anti-prejudice — skýr +2.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterkasta lýðræðis-umbóta-áhersla í kerfinu.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "high",
+          "reason": "Stafrænar þjónustur, einfalda lif íbúa.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur en ekki primary differentiator.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Stuðningur við aðgengi en ekki primary.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Menning og grassroots þátttaka mikilvæg.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hluti af digital-public-service nálgun.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Digital-first simplification getur verið efficiency-friendly.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Vernd grænna svæða hluti af sjálfbærni-áherslu.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Hluti af digital city services nálgun.",
+          "sources": [
+            "https://piratar.is/bestumborgina2026",
+            "https://piratar.is/stefna"
+          ]
+        }
+      }
+    },
+    {
+      "list_letter": "R",
+      "name": "Okkar borg",
+      "short_name": "Okkar borg",
+      "color": "#5B8DBE",
+      "website": "https://www.okkarborg.is/",
+      "policy_url": "https://www.okkarborg.is/",
+      "logo": "assets/logos/r-okkar-borg.png",
+      "summary": "Andstaða við Borgarlínu og þéttingu byggðar. Áhersla á aðgengi einkabíla, kjarnaþjónustu, einföldun stjórnsýslu og úthverfa-vænleg fjölskylduskipulag. Skarpari afstaða gagnvart innflytjendamálum en flest önnur framboð í Reykjavík.",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá okkarborg.is. Áður var allt merkt óvíst — nú er stærsti hluti ása staðfestur. Stefnan er sterkari og skarpari en upphafsmat benti til.",
+      "sources": [
+        "https://www.okkarborg.is/"
+      ],
+      "overall_certainty": "medium",
+      "evidence_score": 0.775,
+      "uncertain_axes_12": [],
+      "twelve_axis_scores": {
+        "velferd": 0,
+        "skattar": -2,
+        "bilar": 2,
+        "borgarlina": -2,
+        "husnaedi": -2,
+        "loftslag": -1,
+        "skolar": 1,
+        "eldri": 1,
+        "atvinnu": 1,
+        "lydraedi": 1,
+        "innflytjendur": -2,
+        "menning": -1
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Skýr andstaða við Borgarlínu sem skipulagða umferðarbyltingu.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": -2,
+          "certainty": "medium",
+          "reason": "Skeptísk gagnvart áframhaldandi þrengingu fyrir bílaumferð.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk áhersla á aðgengi einkabíla og bílastæði.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Skýr andstaða við þéttingu byggðar — vill vernda úthverfaveruleika.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Áhersla á fjölskyldu- og úthverfa-vænleg svæði.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skeptísk gagnvart þenslu opinbers húsnæðis.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk áhersla á lækkun skatta og minnkun útgjalda.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Hógvær afstaða — kjarnaþjónusta í forgangi en ekki útþensla velferðar.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Áhersla á einkaframtak og útvistun þar sem það á við.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Skeptísk gagnvart loftslagsmiðuðu skipulagi sem grundvelli ákvarðana.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Skarpari afstaða gagnvart innflytjendum og hælisleitendum en flest önnur framboð í Reykjavík.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Áhersla á rödd íbúa, þó ekki jafn áberandi og hjá Pírötum.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Sterk áhersla á einföldun stjórnsýslu og minnkun skrifræðis.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Áhersla á fjölskylduvænleika í úthverfum.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við þjónustu við eldri, þó ekki helsta áhersla.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Ekki sterk áhersla — kjarnaþjónusta í forgangi.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": -2,
+          "certainty": "high",
+          "reason": "Áhersla á að einkageirinn taki að sér þjónustu þar sem hægt er.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur við atvinnulíf, þó ekki helsta áhersla.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Áhersla á græn svæði en innan rammans af úthverfa-skipulagi.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Lykiláhersla — kjarnaþjónusta og viðhald í forgangi.",
+          "sources": [
+            "https://www.okkarborg.is/"
+          ]
+        }
+      }
+    },
+    {
+      "list_letter": "S",
+      "name": "Samfylkingin",
+      "short_name": "Samfylkingin",
+      "color": "#C8102E",
+      "website": "https://xs.is/reykjavik",
+      "policy_url": "https://xs.is/reykjavik",
+      "logo": "assets/logos/s-samfylkingin.png",
+      "summary": "Norræn jafnaðar-borgarstjórnun: húsnæðis-uppbygging, þétt þjónustu-tengd byggð, Borgarlína, sterk velferð og skólar, jafnræðis- og inngildingar-áhersla, loftslag samþætt í skipulagi — institutional og managerial.",
+      "tagline": "Engin staðfest hallærisleg slaglína fundin — bættu við handvirkt.",
+      "notes": "Uppfært 2026-05-07 með heimildum frá xs.is/reykjavik.",
+      "sources": [
+        "https://xs.is/reykjavik",
+        "https://xs.is/"
+      ],
+      "overall_certainty": "high",
+      "evidence_score": 0.843,
+      "uncertain_axes_12": [],
+      "twelve_axis_scores": {
+        "velferd": 2,
+        "skattar": 1,
+        "bilar": 0,
+        "borgarlina": 2,
+        "husnaedi": 2,
+        "loftslag": 2,
+        "skolar": 2,
+        "eldri": 1,
+        "atvinnu": 0,
+        "lydraedi": 1,
+        "innflytjendur": 2,
+        "menning": 2
+      },
+      "twenty_axis_details": {
+        "borgarlina_support": {
+          "label": "Stuðningur við Borgarlínu",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Skýr stuðningur við Borgarlínu og institutional sustainable mobility.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "more_bike_lanes": {
+          "label": "Fleiri hjólastígar",
+          "group": "Samgöngur",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Stuðningur við virkar samgöngur og loftslagsmiðað skipulag.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "parking_priority": {
+          "label": "Forgangur einkabíls / bílastæða",
+          "group": "Samgöngur",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Pragmatísk afstaða — institutional, ekki radical anti-car.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "dense_housing": {
+          "label": "Þétt byggð / innfylling",
+          "group": "Húsnæði",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Húsnæðisuppbygging og þétt service-oriented urbanism.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "expand_outward": {
+          "label": "Útþensla borgarinnar",
+          "group": "Húsnæði",
+          "score": -1,
+          "certainty": "high",
+          "reason": "Skeptísk gagnvart útþenslu — vill þétt sustainable byggð.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "public_housing": {
+          "label": "Opinber/óhagnaðardrifin húsnæði",
+          "group": "Húsnæði",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Strong public role í húsnæðisstefnu — Nordic social-democratic.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "lower_taxes": {
+          "label": "Lækkun skatta og gjalda",
+          "group": "Fjármál",
+          "score": -1,
+          "certainty": "medium",
+          "reason": "Investment-heavy en pragmatic — ekki revolutionary expansionism.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "expand_welfare": {
+          "label": "Aukin velferðarútgjöld",
+          "group": "Fjármál",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Identity pillar — strong public services og equality.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "private_sector": {
+          "label": "Aðkoma einkageirans",
+          "group": "Fjármál",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Mixed-economy stance, institutional governance.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "climate_planning": {
+          "label": "Loftslagsmiðað skipulag",
+          "group": "Umhverfi",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Loftslag deeply integrated í planning.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "immigration_inclusion": {
+          "label": "Inngilding innflytjenda",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Strong inclusion/human-rights orientation, Nordic social-democratic.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "direct_democracy": {
+          "label": "Beint lýðræði / íbúakosningar",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Stuðningur en ekki primary differentiator.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "reduce_bureaucracy": {
+          "label": "Minnka skrifræði",
+          "group": "Stjórnsýsla",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Institutional governance — ekki primary.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "family_children": {
+          "label": "Fjölskyldur og börn",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Skólar og fjölskyldumál sem kjarni — equal opportunity.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "elderly_services": {
+          "label": "Þjónusta við eldri borgara",
+          "group": "Samfélag",
+          "score": 1,
+          "certainty": "high",
+          "reason": "Hluti af strong public services áherslu.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "culture_investment": {
+          "label": "Menning og listir",
+          "group": "Samfélag",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Stuðningur við menningu sem hluta af lífsgæðum.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "municipal_operations": {
+          "label": "Sterkur opinber rekstur",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "high",
+          "reason": "Welfare-managerial institutional governance.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "market_business": {
+          "label": "Markaður og atvinnulíf",
+          "group": "Stjórnsýsla",
+          "score": 0,
+          "certainty": "medium",
+          "reason": "Mixed-economy, ekki primary.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "green_protection": {
+          "label": "Vernd grænna svæða",
+          "group": "Umhverfi",
+          "score": 2,
+          "certainty": "high",
+          "reason": "Vernd grænna svæða hluti af sjálfbærni-fókus.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        },
+        "practical_maintenance": {
+          "label": "Hagnýtt viðhald og þjónusta",
+          "group": "Stjórnsýsla",
+          "score": 1,
+          "certainty": "medium",
+          "reason": "Institutional governance — hluti af stable management.",
+          "sources": [
+            "https://xs.is/reykjavik",
+            "https://xs.is/"
+          ]
+        }
+      }
+    }
+  ]
+}
