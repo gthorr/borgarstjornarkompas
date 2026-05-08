@@ -465,16 +465,27 @@ with st.sidebar:
             reset_all()
             st.rerun()
     else:
-        page = "Wizard"
-        st.info(
-            "Önnur sýn er læst þar til þú lýkur spurningalistanum. "
-            "Eitt skref í einu — ýttu á **„Áfram“** eftir hvert svar.",
-            icon="🔒",
+        page = st.radio(
+            "Síða",
+            ["Wizard", "Hópgögn"],
+            format_func=lambda v: "🧭 Taka prófið" if v == "Wizard" else "📊 Lifandi tölfræði",
+            label_visibility="collapsed",
         )
-        if st.session_state.wizard_idx > 0:
-            if st.button("Byrja upp á nýtt", use_container_width=True):
-                reset_all()
-                st.rerun()
+        if page == "Wizard":
+            st.info(
+                "Aðrar greiningarsíður opnast þegar þú lýkur prófinu. "
+                "Eitt skref í einu — ýttu á **„Áfram“** eftir hvert svar.",
+                icon="🔒",
+            )
+            if st.session_state.wizard_idx > 0:
+                if st.button("Byrja upp á nýtt", use_container_width=True):
+                    reset_all()
+                    st.rerun()
+        else:
+            st.caption(
+                "Þú getur skoðað hópgögnin án þess að taka prófið. "
+                "Smelltu á „Taka prófið“ að ofan til að bæta þínu eigin svari við."
+            )
     st.divider()
     st.caption(
         "Þetta er **ekki kosningaráðgjöf**. Tólið sýnir hvaða framboð eru næst "
