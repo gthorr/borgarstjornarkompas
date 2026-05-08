@@ -103,20 +103,18 @@ def submit_response(
         # Notum requests sem er hluti af Streamlit dependency stack.
         import requests
         endpoint = f"{url}/rest/v1/kompas_responses"
+        # Athugið: ENGIN `Prefer: return=representation` — anon má ekki SELECT
+        # á undirliggjandi töflu, og RETURNING myndi skila RLS-villu.
         headers = {
             "apikey": key,
             "Authorization": f"Bearer {key}",
             "Content-Type": "application/json",
-            "Prefer": "return=representation",
         }
         resp = requests.post(endpoint, headers=headers, data=json.dumps(payload), timeout=8)
-        if resp.status_code in (200, 201):
-            data = resp.json()
-            record_id = (data[0].get("id") if isinstance(data, list) and data else None)
-            mark_submitted(record_id)
+        if resp.status_code in (200, 201, 204):
+            mark_submitted()
             return True, "Takk fyrir — svar þitt var skráð nafnlaust."
         else:
-            # 409 / 403 / 401 — láta notanda vita á einföldum nótum
             return False, f"Tókst ekki að skrá svar (HTTP {resp.status_code})."
     except Exception as e:
         return False, f"Tókst ekki að skrá svar: {type(e).__name__}."
