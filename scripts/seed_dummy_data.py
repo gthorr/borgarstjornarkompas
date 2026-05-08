@@ -34,16 +34,46 @@ from scoring import rank_parties, compute_user_axis_vector, implied_party_positi
 from chaos import collect_personality_tags, select_archetypes
 
 
-def answers_favoring(target_code: str) -> dict:
-    """Likert-svör sem fylgja stefnu tiltekins framboðs."""
+def answers_favoring(target_code: str, noise: float = 0.9) -> dict:
+    """Likert-svör sem fylgja stefnu tiltekins framboðs með breitilega óvissu."""
     target = PARTIES[target_code]
     answers = {}
     for q in QUESTIONS:
         pos = implied_party_position(target, q)
-        # Smá hávaði svo svörin séu ekki algjörlega samrýmd
-        noisy = pos + random.uniform(-0.45, 0.45)
+        # Stærri hávaði → meira raunsæ kjósenda-blanda. Sumar spurningar
+        # detta yfir „rétta megin” jafnvel þó kjósandinn fylgi ekki framboðinu
+        # 100%.
+        noisy = pos + random.uniform(-noise, noise)
+        # 12% líkur á að kjósandinn taki þvert á flokkinn á þessari spurningu
+        if random.random() < 0.12:
+            noisy = -noisy + random.uniform(-0.5, 0.5)
         answers[q["id"]] = max(-2, min(2, int(round(noisy))))
     return answers
+
+
+# Hlutfallslegar líkur á því að kjósandi ganga með hverju framboði — gróft mat
+# sem endurspeglar stærri-flokka-bias (Samfylking, Sjálfstæðisflokkur, Píratar...).
+# Þetta er BARA fyrir dummy-gögn og verður fjarlægt þegar nógu margir
+# raunverulegir kjósendur hafa svarað.
+PARTY_WEIGHTS = {
+    "S": 0.25,
+    "D": 0.18,
+    "P": 0.10,
+    "C": 0.09,
+    "F": 0.07,
+    "J": 0.07,
+    "A": 0.06,
+    "B": 0.06,
+    "M": 0.05,
+    "R": 0.04,
+    "G": 0.03,
+}
+
+
+def sample_target_party() -> str:
+    codes = list(PARTY_WEIGHTS.keys())
+    weights = [PARTY_WEIGHTS[c] for c in codes]
+    return random.choices(codes, weights=weights, k=1)[0]
 
 
 def random_personality() -> dict:

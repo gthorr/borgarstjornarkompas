@@ -1516,35 +1516,92 @@ def _archetype_label_lookup() -> dict:
     return {a["id"]: a["label_is"] for a in ARCHETYPES}
 
 
-def _crosstab_heatmap(rows: list[dict], row_key: str, col_key: str = "list_letter",
-                       value_key: str = "n", row_label: str = "", col_label: str = ""):
-    """Plotly heatmap fyrir krosstöflur (categorical × categorical → count)."""
-    try:
-        import plotly.express as px
-    except ImportError:
-        st.caption("Plotly ekki uppsett — sleppi heatmap.")
-        return None
-    if not rows:
-        return None
-    df = pd.DataFrame(rows)
-    pivot = df.pivot_table(index=row_key, columns=col_key, values=value_key,
-                           aggfunc="sum", fill_value=0)
-    # Tryggjum stöðuga röð á dálkum (kjörseðils-röð)
-    party_order_present = [c for c in PARTY_ORDER if c in pivot.columns]
-    if party_order_present:
-        pivot = pivot[party_order_present]
-    fig = px.imshow(
-        pivot.values,
-        x=list(pivot.columns),
-        y=list(pivot.index),
-        labels=dict(x=col_label or "Framboð", y=row_label or "", color="Fjöldi"),
-        text_auto=True,
-        color_continuous_scale="Blues",
-        aspect="auto",
+def _party_chip(code: str, count: int, big: bool = False) -> str:
+    """Lítill (eða stór) hringlaga merki með listabókstaf og fjölda."""
+    p = PARTIES.get(code)
+    if not p:
+        return ""
+    color = p["color"]
+    if big:
+        return (
+            f'<div style="display:inline-flex;align-items:center;gap:0.55rem;'
+            f'background:linear-gradient(135deg,{color},{color}dd);color:white;'
+            f'padding:0.55rem 0.95rem;border-radius:14px;font-weight:700;'
+            f'box-shadow:0 4px 12px {color}55;">'
+            f'<span style="font-size:1.5rem;">{p["list_letter"]}</span>'
+            f'<span style="display:flex;flex-direction:column;line-height:1.05;">'
+            f'<span style="font-size:0.95rem;">{p["short_name"]}</span>'
+            f'<span style="font-size:0.78rem;opacity:0.92;font-weight:500;">'
+            f'{count} {"svar" if count == 1 else "svör"}</span></span></div>'
+        )
+    return (
+        f'<span style="display:inline-flex;align-items:center;gap:0.3rem;'
+        f'background:{color}1a;border:1px solid {color}55;color:{color};'
+        f'padding:2px 9px;border-radius:999px;font-size:0.82rem;'
+        f'font-weight:600;margin-right:0.3rem;">'
+        f'<span style="background:{color};color:white;width:1.1rem;height:1.1rem;'
+        f'border-radius:50%;display:inline-flex;align-items:center;'
+        f'justify-content:center;font-size:0.7rem;font-weight:800;">'
+        f'{p["list_letter"]}</span>{count}</span>'
     )
-    fig.update_layout(height=max(280, 60 + 32 * len(pivot.index)),
-                      margin=dict(l=10, r=10, t=20, b=10))
-    return fig
+
+
+def _render_champion_panel(rows: list[dict], row_key: str, row_emoji: str = ""):
+    """Fyrir hverja flokku-mögulega gildi (t.d. skóstærð) sýnir 'sigurvegara'
+    og hin framboðin sem litla chips. Mun skýrara en heatmap."""
+    if not rows:
+        st.caption("Engin gögn ennþá.")
+        return
+    df = pd.DataFrame(rows)
+    if df.empty:
+        st.caption("Engin gögn ennþá.")
+        return
+
+    for category, group in df.groupby(row_key, sort=False):
+        sorted_group = group.sort_values("n", ascending=False).reset_index(drop=True)
+        total = int(sorted_group["n"].sum())
+        top_row = sorted_group.iloc[0]
+        winners = sorted_group[sorted_group["n"] == top_row["n"]]
+        runners = sorted_group.iloc[len(winners):]
+
+        winners_html = " ".join(
+            _party_chip(r["list_letter"], int(r["n"]), big=True)
+            for _, r in winners.iterrows()
+        )
+        runners_html = ""
+        if len(runners) > 0:
+            runners_html = (
+                "<div style='margin-top:0.55rem;'>"
+                "<span style='font-size:0.78rem;color:#5a6378;margin-right:0.4rem;'>einnig:</span>"
+                + " ".join(
+                    _party_chip(r["list_letter"], int(r["n"]), big=False)
+                    for _, r in runners.iterrows()
+                )
+                + "</div>"
+            )
+
+        crown = "🥇" if len(winners) == 1 else "🤝"
+        st.markdown(
+            f"""
+            <div style="border:1px solid #e3e6ee;border-radius:14px;
+                        padding:0.85rem 1.05rem;margin-bottom:0.7rem;background:white;
+                        box-shadow:0 1px 3px rgba(15,23,42,0.04);">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;
+                            gap:1rem;flex-wrap:wrap;">
+                    <div>
+                        <div style="font-size:0.78rem;color:#5a6378;text-transform:uppercase;
+                                    letter-spacing:0.06em;font-weight:600;">{row_emoji} {category}</div>
+                        <div style="font-size:0.86rem;color:#3a4254;margin-top:0.15rem;">
+                            {total} svar samtals · {crown} {'sigurvegari' if len(winners) == 1 else 'jafntefli'}
+                        </div>
+                    </div>
+                    <div style="text-align:right;">{winners_html}</div>
+                </div>
+                {runners_html}
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 
 def render_aggregates_page():
@@ -1602,26 +1659,17 @@ def render_aggregates_page():
     # ------- 2. Persónugerð × framboð -------
     st.divider()
     st.markdown("### 🧠 Persónugerð × efsta framboð")
-    st.caption(
-        "Hver persónugerð er reiknuð úr svörum við vibe-spurningunum. "
-        "Þetta sýnir hvaða persónugerðir lenda hjá hvaða framboði."
-    )
+    st.caption("Hver persónugerð fær sinn sigurvegara. Bara til gamans — engin tölfræðileg þýðing.")
     arch_rows = submissions.fetch_archetype_x_party()
     if arch_rows:
-        # Map archetype_id → label
         labels = _archetype_label_lookup()
         for row in arch_rows:
             row["archetype_label"] = labels.get(row.get("archetype_id"), row.get("archetype_id"))
-        fig = _crosstab_heatmap(
-            arch_rows,
-            row_key="archetype_label",
-            row_label="Persónugerð",
-            col_label="Framboð",
-        )
-        if fig:
-            st.plotly_chart(fig, use_container_width=True)
-        else:
-            st.dataframe(pd.DataFrame(arch_rows), hide_index=True, use_container_width=True)
+        # Raða eftir total count fyrir hverja persónugerð svo vinsælustu komi efst
+        df = pd.DataFrame(arch_rows)
+        order = df.groupby("archetype_label")["n"].sum().sort_values(ascending=False).index.tolist()
+        ordered = sorted(arch_rows, key=lambda r: order.index(r["archetype_label"]) if r["archetype_label"] in order else 999)
+        _render_champion_panel(ordered, row_key="archetype_label", row_emoji="🧠")
     else:
         st.caption("Engin persónugerðar-gögn ennþá.")
 
@@ -1631,39 +1679,21 @@ def render_aggregates_page():
     st.caption("Hin lengi-langþráða Reykvíska samsvörunarrannsókn. Niðurstaðan er… fyndin.")
     shoe_rows = submissions.fetch_shoe_x_party()
     if shoe_rows:
-        # Tryggjum reglulega röð á skóstærðum
         size_order = ["Undir 36", "36–39", "40–43", "44–46", "Yfir 46", "Vil ekki segja"]
         for row in shoe_rows:
             row["_sort"] = size_order.index(row["shoe_size"]) if row["shoe_size"] in size_order else 999
         shoe_rows.sort(key=lambda r: r["_sort"])
-        fig = _crosstab_heatmap(
-            shoe_rows,
-            row_key="shoe_size",
-            row_label="Skóstærð",
-            col_label="Framboð",
-        )
-        if fig:
-            st.plotly_chart(fig, use_container_width=True)
-        else:
-            st.dataframe(pd.DataFrame(shoe_rows), hide_index=True, use_container_width=True)
+        _render_champion_panel(shoe_rows, row_key="shoe_size", row_emoji="👟")
     else:
         st.caption("Engin skóstærðar-gögn ennþá.")
 
     # ------- 4. Sundlaug × framboð -------
     st.divider()
     st.markdown("### 🏊 Uppáhalds sundlaug × efsta framboð")
+    st.caption("Sjáið hvaða sundlaug býr til hvaða pólitík.")
     pool_rows = submissions.fetch_pool_x_party()
     if pool_rows:
-        fig = _crosstab_heatmap(
-            pool_rows,
-            row_key="laug",
-            row_label="Sundlaug",
-            col_label="Framboð",
-        )
-        if fig:
-            st.plotly_chart(fig, use_container_width=True)
-        else:
-            st.dataframe(pd.DataFrame(pool_rows), hide_index=True, use_container_width=True)
+        _render_champion_panel(pool_rows, row_key="laug", row_emoji="🏊")
     else:
         st.caption("Engin laugar-gögn ennþá.")
 
