@@ -1758,7 +1758,7 @@ def render_aggregates_page():
     # ------- 3. Skóstærð × framboð -------
     st.divider()
     st.markdown("### 👟 Skóstærð × framboð")
-    st.caption("Hin lengi-langþráða Reykvíska samsvörunarrannsókn. Niðurstaðan er… fyndin.")
+    st.caption("Hin lengi - langþráða Reykvíska samsvörunarrannsókn. Hver er skóstærð mögulegra kjósenda flokkanna?")
     shoe_rows = submissions.fetch_shoe_x_party()
     if shoe_rows:
         size_order = ["Undir 36", "36–39", "40–43", "44–46", "Yfir 46", "Vil ekki segja"]
