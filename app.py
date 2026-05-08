@@ -633,6 +633,35 @@ def render_wizard():
             unsafe_allow_html=True,
         )
 
+        # ---- Persónuvernd / gagnasöfnun: áberandi tilkynning UPP-FYRIR ----
+        st.markdown(
+            """
+            <div style="background:#fff;border:1px solid #b9d7ec;border-radius:12px;
+                        padding:1rem 1.2rem;margin:0 0 1.4rem 0;
+                        box-shadow:0 2px 8px rgba(31,78,140,0.06);">
+                <div style="display:flex;align-items:flex-start;gap:0.8rem;">
+                    <div style="font-size:1.6rem;line-height:1;">🔒</div>
+                    <div style="flex:1;">
+                        <strong style="color:#1d3557;">Persónuvernd og gagnasöfnun</strong><br/>
+                        <span style="font-size:0.92rem;color:#3a4254;">
+                            Í lok prófsins færðu valfrjálst að deila svari þínu <strong>nafnlaust</strong>
+                            til að hjálpa okkur að skoða heildardreifingu á svörum. Þú þarft að
+                            <strong>haka virkan</strong> við samþykki — sjálfgefið er ekkert sent.
+                        </span>
+                        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.55rem;
+                                    font-size:0.86rem;">
+                            <span style="color:#1f6f43;">✅ Aðeins svör + reiknuð niðurstaða</span>
+                            <span style="color:#7a2222;">🚫 Engin nöfn</span>
+                            <span style="color:#7a2222;">🚫 Engin tölvupóstföng</span>
+                            <span style="color:#7a2222;">🚫 Engin IP eða notendareikningar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
         c1, c2, c3 = st.columns(3)
         with c1:
             st.markdown("#### 🧭 Hvernig virkar þetta?")
