@@ -1516,6 +1516,74 @@ def _archetype_label_lookup() -> dict:
     return {a["id"]: a["label_is"] for a in ARCHETYPES}
 
 
+def _render_race_chart(rows: list[dict], row_key: str, height_per_row: int = 56,
+                        max_categories: int = 12):
+    """Stacked horizontal bar chart — race-style. Hver röð er kategoría,
+    segmenti eru framboð, lengd = fjöldi. Stærsti hluti vinnur „kapphlaupið“."""
+    if not rows:
+        st.caption("Engin gögn ennþá.")
+        return
+    df = pd.DataFrame(rows)
+    if df.empty:
+        st.caption("Engin gögn ennþá.")
+        return
+
+    try:
+        import plotly.express as px
+    except ImportError:
+        st.dataframe(df, use_container_width=True)
+        return
+
+    # Halda eftir top-N kategoría í sample (mest svar)
+    cat_totals = df.groupby(row_key)["n"].sum().sort_values(ascending=False)
+    keep = cat_totals.head(max_categories).index.tolist()
+    df = df[df[row_key].isin(keep)].copy()
+
+    # Röð: vinsælasta kategoría neðst (Plotly bar y-as gengur upp)
+    cat_order = cat_totals.head(max_categories).index.tolist()[::-1]
+    df[row_key] = pd.Categorical(df[row_key], categories=cat_order, ordered=True)
+
+    # Innan hverrar staflu — raða eftir kjörseðils-röð svo litir séu samkvæmir
+    party_index = {c: i for i, c in enumerate(PARTY_ORDER)}
+    df["__party_order"] = df["list_letter"].map(lambda c: party_index.get(c, 999))
+    df = df.sort_values([row_key, "__party_order"])
+
+    color_map = {c: PARTIES[c]["color"] for c in df["list_letter"].unique() if c in PARTIES}
+
+    fig = px.bar(
+        df,
+        x="n",
+        y=row_key,
+        color="list_letter",
+        color_discrete_map=color_map,
+        orientation="h",
+        text="list_letter",
+        custom_data=["party_name", "n"],
+        labels={"n": "Fjöldi", row_key: "", "list_letter": "Framboð"},
+    )
+    fig.update_traces(
+        textposition="inside",
+        textfont=dict(size=12, color="white", family="Inter, sans-serif"),
+        insidetextanchor="middle",
+        hovertemplate="<b>%{customdata[0]}</b><br>Fjöldi: %{customdata[1]}<extra></extra>",
+        marker=dict(line=dict(width=1, color="white")),
+    )
+    n_cats = len(cat_order)
+    fig.update_layout(
+        barmode="stack",
+        height=max(220, 80 + height_per_row * n_cats),
+        margin=dict(l=10, r=10, t=20, b=20),
+        showlegend=True,
+        legend=dict(orientation="h", y=-0.18, title=""),
+        xaxis=dict(showgrid=True, gridcolor="#eef0f6", title="", zeroline=False, dtick=1),
+        yaxis=dict(showgrid=False, title=""),
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        font=dict(family="Inter, sans-serif"),
+    )
+    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+
+
 def _party_chip(code: str, count: int, big: bool = False) -> str:
     """Lítill (eða stór) hringlaga merki með listabókstaf og fjölda."""
     p = PARTIES.get(code)
@@ -1658,24 +1726,20 @@ def render_aggregates_page():
 
     # ------- 2. Persónugerð × framboð -------
     st.divider()
-    st.markdown("### 🧠 Persónugerð × efsta framboð")
-    st.caption("Hver persónugerð fær sinn sigurvegara. Bara til gamans — engin tölfræðileg þýðing.")
+    st.markdown("### 🧠 Persónugerð × framboð")
+    st.caption("Kapphlaup persónugerða — hver hefur stærsta hluta hverrar línu? Bara til gamans.")
     arch_rows = submissions.fetch_archetype_x_party()
     if arch_rows:
         labels = _archetype_label_lookup()
         for row in arch_rows:
             row["archetype_label"] = labels.get(row.get("archetype_id"), row.get("archetype_id"))
-        # Raða eftir total count fyrir hverja persónugerð svo vinsælustu komi efst
-        df = pd.DataFrame(arch_rows)
-        order = df.groupby("archetype_label")["n"].sum().sort_values(ascending=False).index.tolist()
-        ordered = sorted(arch_rows, key=lambda r: order.index(r["archetype_label"]) if r["archetype_label"] in order else 999)
-        _render_champion_panel(ordered, row_key="archetype_label", row_emoji="🧠")
+        _render_race_chart(arch_rows, row_key="archetype_label")
     else:
         st.caption("Engin persónugerðar-gögn ennþá.")
 
     # ------- 3. Skóstærð × framboð -------
     st.divider()
-    st.markdown("### 👟 Skóstærð × efsta framboð")
+    st.markdown("### 👟 Skóstærð × framboð")
     st.caption("Hin lengi-langþráða Reykvíska samsvörunarrannsókn. Niðurstaðan er… fyndin.")
     shoe_rows = submissions.fetch_shoe_x_party()
     if shoe_rows:
@@ -1683,17 +1747,17 @@ def render_aggregates_page():
         for row in shoe_rows:
             row["_sort"] = size_order.index(row["shoe_size"]) if row["shoe_size"] in size_order else 999
         shoe_rows.sort(key=lambda r: r["_sort"])
-        _render_champion_panel(shoe_rows, row_key="shoe_size", row_emoji="👟")
+        _render_race_chart(shoe_rows, row_key="shoe_size")
     else:
         st.caption("Engin skóstærðar-gögn ennþá.")
 
     # ------- 4. Sundlaug × framboð -------
     st.divider()
-    st.markdown("### 🏊 Uppáhalds sundlaug × efsta framboð")
+    st.markdown("### 🏊 Uppáhalds sundlaug × framboð")
     st.caption("Sjáið hvaða sundlaug býr til hvaða pólitík.")
     pool_rows = submissions.fetch_pool_x_party()
     if pool_rows:
-        _render_champion_panel(pool_rows, row_key="laug", row_emoji="🏊")
+        _render_race_chart(pool_rows, row_key="laug")
     else:
         st.caption("Engin laugar-gögn ennþá.")
 
