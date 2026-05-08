@@ -1742,6 +1742,11 @@ def render_aggregates_page():
     st.markdown("### 🧠 Persónugerð × framboð")
     st.caption("Kapphlaup persónugerða — hver hefur stærsta hluta hverrar línu? Bara til gamans.")
     arch_rows = submissions.fetch_archetype_x_party()
+    # Sleppa fallback-arketýpum (þær merkja „ekkert mynstur fannst“)
+    arch_rows = [
+        r for r in (arch_rows or [])
+        if not str(r.get("archetype_id", "")).startswith("fallback_")
+    ]
     if arch_rows:
         labels = _archetype_label_lookup()
         for row in arch_rows:

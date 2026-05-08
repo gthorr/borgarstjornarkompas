@@ -58,14 +58,20 @@ def mark_submitted(record_id: str | None = None):
 
 
 def _compute_archetype_ids(answers_likert: dict) -> list[str]:
-    """Reiknar arketýpu-IDs frá persónuleikasvörum, með try/except svo að
-    submission bregst ekki ef chaos-modulinn breytist."""
+    """Reiknar arketýpu-IDs frá persónuleikasvörum.
+
+    Ath: SLEPPUM fallback-arketýpum (fallback_*) — þær merkja „engin sterk
+    persónugerð fannst“ og eru því ekki marktækar í aggregat-tölfræði.
+    """
     try:
         from questions import personality_questions
         from chaos import collect_personality_tags, select_archetypes
         tags = collect_personality_tags(answers_likert, personality_questions())
         archetypes = select_archetypes(tags)
-        return [a["id"] for a in archetypes if a.get("id")]
+        return [
+            a["id"] for a in archetypes
+            if a.get("id") and not a["id"].startswith("fallback_")
+        ]
     except Exception:
         return []
 
