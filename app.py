@@ -979,7 +979,7 @@ def render_data_collection_section(top3, user_axis):
         'border:1px solid #b9d7ec;">',
         unsafe_allow_html=True,
     )
-    st.markdown("#### 🤝 Vilt þú deila svari þínu nafnlaust?")
+    st.markdown("#### 🤝 Er í lagi að við geymum svarið þitt nafnlaust og órekjanlegt til greiningar?")
 
     # ---- Áberandi privacy-skýring (alltaf sýnileg) ----
     st.markdown(
@@ -1024,7 +1024,7 @@ def render_data_collection_section(top3, user_axis):
     )
 
     consented = st.checkbox(
-        "Er í lagi að við geymum svarið þitt **nafnlaust og órekjanlegt** til greiningar?",
+        "Já — það er í lagi.",
         key="consent_checkbox",
     )
 
