@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 Spurningar fyrir borgarstjórnarkompásinn.
 
@@ -342,3 +344,90 @@ def question_axis_summary():
         for axis, _ in q.get("axes", []):
             counts[axis] = counts.get(axis, 0) + 1
     return counts
+
+
+# ---------------------------------------------------------------------------
+# Per-session sampling — gefur hverjum notanda einstakan undirlist svo þeir
+# fái EKKI sömu spurningar í hvert skipti sem þeir taka prófið.
+#
+# Reglur:
+#   • Policy: ax-balanced — hver helsti ás (frumáás í q["axes"][0]) fær minnst
+#     eina spurningu áður en seðlast til viðbótar.
+#   • Personality + Chaos: einföld slembiröðun, taka N efstu.
+#   • Allt seedað með stöðugum string (session_id), svo sami notandi fær sömu
+#     spurningar ef þeir refresh-a — en nýr notandi (eða „Endurtaka prófið“)
+#     fær nýjar spurningar.
+# ---------------------------------------------------------------------------
+
+import random as _random
+
+
+def _axis_balanced_policy(rng: _random.Random, n: int) -> list[dict]:
+    """Skilar `n` policy-spurningum, þar sem hver helsti ás er tryggður."""
+    by_axis: dict[str, list[dict]] = {}
+    for q in QUESTIONS:
+        if not q.get("axes"):
+            continue
+        primary_axis = q["axes"][0][0]
+        by_axis.setdefault(primary_axis, []).append(q)
+
+    chosen_ids: set[str] = set()
+    out: list[dict] = []
+
+    # 1. Pick one from each primary-axis bucket (covers every axis at least once)
+    axes_shuffled = list(by_axis.keys())
+    rng.shuffle(axes_shuffled)
+    for axis in axes_shuffled:
+        bucket = [q for q in by_axis[axis] if q["id"] not in chosen_ids]
+        if not bucket:
+            continue
+        pick = rng.choice(bucket)
+        out.append(pick)
+        chosen_ids.add(pick["id"])
+        if len(out) >= n:
+            return out
+
+    # 2. Fill remaining slots from the rest, in random order
+    remaining = [q for q in QUESTIONS if q["id"] not in chosen_ids]
+    rng.shuffle(remaining)
+    while len(out) < n and remaining:
+        out.append(remaining.pop(0))
+    return out
+
+
+def sample_questions(seed: str | int,
+                     policy_count: int = 22,
+                     personality_count: int = 6,
+                     chaos_count: int = 3) -> list[dict]:
+    """Skilar interleaved spurningalista, deterministically seeded.
+
+    Sami `seed` → sömu spurningar (góð UX við refresh).
+    Nýr `seed` → nýjar spurningar (góð UX við „Endurtaka prófið“).
+    """
+    rng = _random.Random(seed)
+
+    sampled_policy = _axis_balanced_policy(rng, min(policy_count, len(QUESTIONS)))
+
+    pers_pool = list(PERSONALITY_QUESTIONS)
+    rng.shuffle(pers_pool)
+    sampled_personality = pers_pool[:personality_count]
+
+    chaos_pool = list(CHAOS_QUESTIONS)
+    rng.shuffle(chaos_pool)
+    sampled_chaos = chaos_pool[:chaos_count]
+
+    # Interleave eins og _interleave_questions gerir
+    out: list[dict] = []
+    pers_idx = 0
+    chaos_idx = 0
+    for i, q in enumerate(sampled_policy):
+        out.append(q)
+        if (i + 1) % 4 == 0 and pers_idx < len(sampled_personality):
+            out.append(sampled_personality[pers_idx])
+            pers_idx += 1
+        if (i + 1) % 7 == 0 and chaos_idx < len(sampled_chaos):
+            out.append(sampled_chaos[chaos_idx])
+            chaos_idx += 1
+    out.extend(sampled_personality[pers_idx:])
+    out.extend(sampled_chaos[chaos_idx:])
+    return out

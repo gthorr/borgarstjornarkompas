@@ -36,6 +36,7 @@ from questions import (
     chaos_questions,
     personality_questions,
     policy_questions,
+    sample_questions,
 )
 from scoring import (
     axis_agreement,
@@ -286,6 +287,18 @@ def reset_all():
     st.session_state.chaos_answers = {}
     st.session_state.submitted = False
     st.session_state.wizard_idx = -1
+    # Henda spurningarvali og lotu-auðkenni svo notandinn fái NÝJAR spurningar
+    st.session_state.pop("sampled_questions", None)
+    st.session_state.pop("client_session_id", None)
+    st.session_state.pop("submission_saved", None)
+
+
+def get_session_questions() -> list[dict]:
+    """Skilar spurningalista lotu — sömu fyrir sama notanda en breytast við reset."""
+    if "sampled_questions" not in st.session_state:
+        seed = submissions.ensure_session_id()
+        st.session_state.sampled_questions = sample_questions(seed)
+    return st.session_state.sampled_questions
 
 
 # ---------------------------------------------------------------------------
@@ -627,7 +640,7 @@ def _is_question_answered(q: dict) -> bool:
 
 def render_wizard():
     """Wizard-mode spurningalisti — eitt skref í einu, valmynd læst."""
-    qs = ALL_QUESTIONS
+    qs = get_session_questions()
     total = len(qs)
     idx = st.session_state.wizard_idx
 
@@ -850,8 +863,9 @@ def render_results():
         "svara og skráðrar stefnu framboðanna á 12 stefnuásum."
     )
 
-    ranking = rank_parties(st.session_state.answers, ALL_QUESTIONS, PARTIES)
-    user_axis = compute_user_axis_vector(st.session_state.answers, ALL_QUESTIONS)
+    qs_for_session = get_session_questions()
+    ranking = rank_parties(st.session_state.answers, qs_for_session, PARTIES)
+    user_axis = compute_user_axis_vector(st.session_state.answers, qs_for_session)
 
     top3 = ranking[:3]
 
