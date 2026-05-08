@@ -291,6 +291,8 @@ def reset_all():
     st.session_state.pop("sampled_questions", None)
     st.session_state.pop("client_session_id", None)
     st.session_state.pop("submission_saved", None)
+    st.session_state.pop("consent_skipped", None)
+    st.session_state.pop("consent_checkbox", None)
 
 
 def get_session_questions() -> list[dict]:
@@ -1017,15 +1019,13 @@ def render_data_collection_section(top3, user_axis):
         st.markdown("</div>", unsafe_allow_html=True)
         return
 
-    st.caption(
-        "Gögnin eru notuð til að skoða heildardreifingu á svörum (t.d. hvaða framboð "
-        "koma oftast efst). Þau verða aldrei seld eða framseld."
-    )
-
-    consented = st.checkbox(
-        "Já — það er í lagi.",
-        key="consent_checkbox",
-    )
+    if st.session_state.get("consent_skipped"):
+        st.caption(
+            "Þú slepptir því að deila gögnunum. Það er alveg fínt — "
+            "niðurstaðan þín er bara fyrir þig."
+        )
+        st.markdown("</div>", unsafe_allow_html=True)
+        return
 
     if not submissions.is_configured():
         st.info(
@@ -1035,28 +1035,32 @@ def render_data_collection_section(top3, user_axis):
         st.markdown("</div>", unsafe_allow_html=True)
         return
 
-    submit_disabled = not consented
-    if st.button(
-        "📤 Senda svar nafnlaust",
-        disabled=submit_disabled,
-        type="primary" if consented else "secondary",
-    ):
-        ok, msg = submissions.submit_response(
-            answers_likert=st.session_state.answers,
-            answers_chaos=st.session_state.chaos_answers,
-            top3=top3,
-            user_axis_vector=user_axis,
-            evidence_summary={
-                "best_match_code": top3[0]["code"] if top3 else None,
-                "best_match_percent": round(top3[0]["match"] * 100, 1) if top3 else None,
-            },
-        )
-        if ok:
-            st.success(msg, icon="✅")
-        else:
-            st.warning(msg, icon="⚠️")
-    if submit_disabled:
-        st.caption("Þú þarft að haka við samþykkis-reitinn til að senda.")
+    st.caption(
+        "Gögnin eru notuð til að skoða heildardreifingu á svörum (t.d. hvaða framboð "
+        "koma oftast efst). Þau verða aldrei seld eða framseld."
+    )
+
+    c1, c2 = st.columns([3, 2])
+    with c1:
+        if st.button("✅ Já — senda nafnlaust", type="primary", use_container_width=True):
+            ok, msg = submissions.submit_response(
+                answers_likert=st.session_state.answers,
+                answers_chaos=st.session_state.chaos_answers,
+                top3=top3,
+                user_axis_vector=user_axis,
+                evidence_summary={
+                    "best_match_code": top3[0]["code"] if top3 else None,
+                    "best_match_percent": round(top3[0]["match"] * 100, 1) if top3 else None,
+                },
+            )
+            if ok:
+                st.rerun()
+            else:
+                st.warning(msg, icon="⚠️")
+    with c2:
+        if st.button("Sleppa því", use_container_width=True):
+            st.session_state.consent_skipped = True
+            st.rerun()
 
     st.markdown("</div>", unsafe_allow_html=True)
 
