@@ -49,6 +49,7 @@ from chaos import (
     render_archetype_blurb,
     select_archetypes,
 )
+import submissions
 from policy_matrix import (
     POLICY_AXES,
     POLICY_AXIS_GROUPS,
@@ -465,7 +466,7 @@ with st.sidebar:
     else:
         page = "Wizard"
         st.info(
-            "Önnur sýna er læst þar til þú lýkur spurningalistanum. "
+            "Önnur sýn er læst þar til þú lýkur spurningalistanum. "
             "Eitt skref í einu — ýttu á **„Áfram“** eftir hvert svar.",
             icon="🔒",
         )
@@ -879,6 +880,9 @@ def render_results():
 
     st.markdown("**Lestu áður en þú kýst:** opinberar stefnuskrár framboða eru lokaorðið.")
 
+    # ---- Nafnlaus gagnasöfnun ----
+    render_data_collection_section(top3, user_axis)
+
     # ---- Deilanleiki ----
     render_share_section(top3, ranking)
 
@@ -906,6 +910,101 @@ def render_results():
     # ---- Persónugerð (vibe) ----
     st.divider()
     render_personality_section(user_axis)
+
+
+def render_data_collection_section(top3, user_axis):
+    """Nafnlaus gagnasöfnun með áberandi samþykkis-yfirlýsingu.
+
+    Persónuverndar-skýringin er ALLTAF sýnileg — bæði þegar Supabase er
+    uppsett (raunveruleg söfnun) og þegar ekki (forskoðunar-háttur).
+    """
+    st.divider()
+    st.markdown(
+        '<div class="bk-bonus" style="background:linear-gradient(135deg,#eef3fa,#dbe7f4);'
+        'border:1px solid #b9d7ec;">',
+        unsafe_allow_html=True,
+    )
+    st.markdown("#### 🤝 Vilt þú deila svari þínu nafnlaust?")
+
+    # ---- Áberandi privacy-skýring (alltaf sýnileg) ----
+    st.markdown(
+        """
+        <div style="background:white;border:1px solid #b9d7ec;border-radius:10px;
+                    padding:1rem 1.1rem;margin-bottom:0.8rem;">
+            <div style="display:flex;gap:1.2rem;flex-wrap:wrap;">
+                <div style="flex:1;min-width:240px;">
+                    <strong style="color:#1f6f43;">✅ Við söfnum:</strong>
+                    <ul style="margin:0.3rem 0 0 1rem;padding:0;">
+                        <li>Svörum þínum við spurningalistanum</li>
+                        <li>Reiknuðum efstu 3 framboðum</li>
+                        <li>Tíma og tilviljunarkenndu lotu-auðkenni</li>
+                    </ul>
+                </div>
+                <div style="flex:1;min-width:240px;">
+                    <strong style="color:#7a2222;">🚫 Við söfnum EKKI:</strong>
+                    <ul style="margin:0.3rem 0 0 1rem;padding:0;">
+                        <li><strong>Engin nöfn</strong></li>
+                        <li><strong>Engin tölvupóstföng</strong></li>
+                        <li><strong>Engin IP-tala eða staðsetning</strong></li>
+                        <li><strong>Engin tenging við notendareikninga</strong> (Facebook, Google o.fl.)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    if submissions.already_submitted():
+        st.success(
+            "Takk — svar þitt er þegar skráð nafnlaust. Þú getur áfram skoðað og deilt niðurstöðunum.",
+            icon="✅",
+        )
+        st.markdown("</div>", unsafe_allow_html=True)
+        return
+
+    st.caption(
+        "Gögnin eru notuð til að skoða heildardreifingu á svörum (t.d. hvaða framboð "
+        "koma oftast efst). Þau verða aldrei seld eða framseld."
+    )
+
+    consented = st.checkbox(
+        "Já, ég samþykki að svar mitt verði geymt **nafnlaust** til greiningar.",
+        key="consent_checkbox",
+    )
+
+    if not submissions.is_configured():
+        st.info(
+            "ℹ️ Forskoðunar-háttur — gagnasöfnun er ekki uppsett í þessu umhverfi. "
+            "Til að virkja: bættu Supabase-tengingu við Streamlit-secrets.",
+        )
+        st.markdown("</div>", unsafe_allow_html=True)
+        return
+
+    submit_disabled = not consented
+    if st.button(
+        "📤 Senda svar nafnlaust",
+        disabled=submit_disabled,
+        type="primary" if consented else "secondary",
+    ):
+        ok, msg = submissions.submit_response(
+            answers_likert=st.session_state.answers,
+            answers_chaos=st.session_state.chaos_answers,
+            top3=top3,
+            user_axis_vector=user_axis,
+            evidence_summary={
+                "best_match_code": top3[0]["code"] if top3 else None,
+                "best_match_percent": round(top3[0]["match"] * 100, 1) if top3 else None,
+            },
+        )
+        if ok:
+            st.success(msg, icon="✅")
+        else:
+            st.warning(msg, icon="⚠️")
+    if submit_disabled:
+        st.caption("Þú þarft að haka við samþykkis-reitinn til að senda.")
+
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
 def render_share_section(top3, ranking):
@@ -1147,8 +1246,16 @@ def matrix_score_chip(score: int, certainty: str, tooltip: str | None = None) ->
 
     title_attr = ""
     if tooltip:
-        # Streamlit's markdown HTML can pass through `title` for browser tooltip
-        safe = tooltip.replace('"', "&quot;")
+        # CommonMark interprets blank lines inside raw HTML as ending the tag,
+        # so flatten any newlines to a separator and escape quotes.
+        safe = (
+            tooltip.replace("\r", "")
+                   .replace("\n", " · ")
+                   .replace('"', "&quot;")
+        )
+        # collapse multiple separators
+        while " ·  · " in safe:
+            safe = safe.replace(" ·  · ", " · ")
         title_attr = f' title="{safe}"'
 
     return (
@@ -1261,7 +1368,7 @@ def render_policy_matrix():
                 for code in PARTY_ORDER:
                     detail = get_detail(code, axis["id"])
                     tooltip = (
-                        f"{PARTIES[code]['short_name']} · vissa: {detail['certainty']}\n\n"
+                        f"{PARTIES[code]['short_name']} · vissa: {detail['certainty']} — "
                         f"{detail['reason']}"
                     )
                     html.append(
