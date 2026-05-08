@@ -1565,25 +1565,14 @@ def render_aggregates_page():
 
     total = submissions.fetch_total()
 
-    a, b = st.columns([1, 3])
-    with a:
-        st.metric("Heildarfjöldi svara", total)
-    with b:
-        if st.button("🔄 Endurnýja gögn", use_container_width=False):
-            submissions.clear_aggregate_cache()
-            st.rerun()
-        st.caption("Gögn eru cached í 60 sek. — refresh til að ná nýjustu svörum strax.")
+    if st.button("🔄 Endurnýja gögn"):
+        submissions.clear_aggregate_cache()
+        st.rerun()
+    st.caption("Gögn eru cached í 60 sek. — refresh til að ná nýjustu svörum strax.")
 
     if total == 0:
         st.info("Engin svör hafa enn verið skráð. Komdu aftur eftir smá.")
         return
-
-    if total < 10:
-        st.warning(
-            f"Lítið úrtak ({total} svar). Tölurnar hér eru fyrst og fremst "
-            "skemmtilegar til að skoða — ekki tölfræðilega marktækar.",
-            icon="⚠️",
-        )
 
     # ------- 1. Top-1 framboð: bar chart -------
     st.divider()
