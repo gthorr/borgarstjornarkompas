@@ -57,6 +57,19 @@ def mark_submitted(record_id: str | None = None):
         st.session_state["submission_id"] = record_id
 
 
+def _compute_archetype_ids(answers_likert: dict) -> list[str]:
+    """Reiknar arketýpu-IDs frá persónuleikasvörum, með try/except svo að
+    submission bregst ekki ef chaos-modulinn breytist."""
+    try:
+        from questions import personality_questions
+        from chaos import collect_personality_tags, select_archetypes
+        tags = collect_personality_tags(answers_likert, personality_questions())
+        archetypes = select_archetypes(tags)
+        return [a["id"] for a in archetypes if a.get("id")]
+    except Exception:
+        return []
+
+
 def submit_response(
     answers_likert: dict,
     answers_chaos: dict,
@@ -82,6 +95,7 @@ def submit_response(
         ],
         "user_axis_vector": {k: round(float(v), 3) for k, v in user_axis_vector.items()},
         "evidence_summary": evidence_summary or {},
+        "archetype_ids": _compute_archetype_ids(answers_likert),
         "app_version": APP_VERSION,
     }
 
@@ -106,6 +120,74 @@ def submit_response(
             return False, f"Tókst ekki að skrá svar (HTTP {resp.status_code})."
     except Exception as e:
         return False, f"Tókst ekki að skrá svar: {type(e).__name__}."
+
+
+# ---------------------------------------------------------------------------
+# RPC-fetch fyrir lifandi tölfræðisíðu
+# ---------------------------------------------------------------------------
+
+def _rpc_call(rpc_name: str, params: dict | None = None):
+    url, key = _supabase_config()
+    if not (url and key):
+        return None
+    try:
+        import requests
+        endpoint = f"{url}/rest/v1/rpc/{rpc_name}"
+        headers = {
+            "apikey": key,
+            "Authorization": f"Bearer {key}",
+            "Content-Type": "application/json",
+        }
+        r = requests.post(endpoint, headers=headers, json=params or {}, timeout=8)
+        if r.ok:
+            return r.json()
+    except Exception:
+        pass
+    return None
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def fetch_total() -> int:
+    """Heildarfjöldi svara. Cached í 60 sek."""
+    out = _rpc_call("get_total_responses")
+    if isinstance(out, int):
+        return out
+    if isinstance(out, list) and out:
+        return int(out[0]) if isinstance(out[0], (int, float)) else 0
+    return 0
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def fetch_top1_counts() -> list[dict]:
+    out = _rpc_call("get_top1_counts")
+    return out or []
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def fetch_shoe_x_party() -> list[dict]:
+    out = _rpc_call("get_shoe_x_party")
+    return out or []
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def fetch_pool_x_party() -> list[dict]:
+    out = _rpc_call("get_pool_x_party")
+    return out or []
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def fetch_archetype_x_party() -> list[dict]:
+    out = _rpc_call("get_archetype_x_party")
+    return out or []
+
+
+def clear_aggregate_cache():
+    """Hreinsar cache fyrir lifandi gögn — notað af „Endurnýja“ takka."""
+    fetch_total.clear()
+    fetch_top1_counts.clear()
+    fetch_shoe_x_party.clear()
+    fetch_pool_x_party.clear()
+    fetch_archetype_x_party.clear()
 
 
 def consent_disclosure_md() -> str:

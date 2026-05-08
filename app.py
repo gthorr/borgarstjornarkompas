@@ -454,6 +454,7 @@ with st.sidebar:
                 "Niðurstöður",
                 "Samanburður",
                 "Stefnu-fylki",
+                "Hópgögn",
                 "Aðferðafræði",
                 "Upphafssíða",
             ],
@@ -1495,6 +1496,185 @@ def render_policy_matrix():
 
 
 # ---------------------------------------------------------------------------
+# Síða: Hópgögn — lifandi tölfræði (uppfærist sjálfkrafa á 60 sek)
+# ---------------------------------------------------------------------------
+
+def _archetype_label_lookup() -> dict:
+    """Map archetype id → íslenskt label. Fela arketýpur sem ekki er hægt að uppfletta."""
+    from chaos import ARCHETYPES
+    return {a["id"]: a["label_is"] for a in ARCHETYPES}
+
+
+def _crosstab_heatmap(rows: list[dict], row_key: str, col_key: str = "list_letter",
+                       value_key: str = "n", row_label: str = "", col_label: str = ""):
+    """Plotly heatmap fyrir krosstöflur (categorical × categorical → count)."""
+    try:
+        import plotly.express as px
+    except ImportError:
+        st.caption("Plotly ekki uppsett — sleppi heatmap.")
+        return None
+    if not rows:
+        return None
+    df = pd.DataFrame(rows)
+    pivot = df.pivot_table(index=row_key, columns=col_key, values=value_key,
+                           aggfunc="sum", fill_value=0)
+    # Tryggjum stöðuga röð á dálkum (kjörseðils-röð)
+    party_order_present = [c for c in PARTY_ORDER if c in pivot.columns]
+    if party_order_present:
+        pivot = pivot[party_order_present]
+    fig = px.imshow(
+        pivot.values,
+        x=list(pivot.columns),
+        y=list(pivot.index),
+        labels=dict(x=col_label or "Framboð", y=row_label or "", color="Fjöldi"),
+        text_auto=True,
+        color_continuous_scale="Blues",
+        aspect="auto",
+    )
+    fig.update_layout(height=max(280, 60 + 32 * len(pivot.index)),
+                      margin=dict(l=10, r=10, t=20, b=10))
+    return fig
+
+
+def render_aggregates_page():
+    st.title("📊 Hópgögn — lifandi tölfræði")
+
+    if not submissions.is_configured():
+        st.info(
+            "Gagnasöfnun er ekki uppsett í þessu umhverfi. "
+            "Þessi síða birtir niðurstöður um leið og Supabase-tenging er virk."
+        )
+        return
+
+    disclaimer_box(
+        "Allar tölur hér eru úr nafnlausum svörum sem notendur hafa SAMÞYKKT "
+        "að deila. Engin nöfn, engar IP-tölur, engar notendatengingar — aðeins "
+        "samanteknar tölur. Tölfræði getur verið skökk í litlu úrtaki."
+    )
+
+    total = submissions.fetch_total()
+
+    a, b = st.columns([1, 3])
+    with a:
+        st.metric("Heildarfjöldi svara", total)
+    with b:
+        if st.button("🔄 Endurnýja gögn", use_container_width=False):
+            submissions.clear_aggregate_cache()
+            st.rerun()
+        st.caption("Gögn eru cached í 60 sek. — refresh til að ná nýjustu svörum strax.")
+
+    if total == 0:
+        st.info("Engin svör hafa enn verið skráð. Komdu aftur eftir smá.")
+        return
+
+    if total < 10:
+        st.warning(
+            f"Lítið úrtak ({total} svar). Tölurnar hér eru fyrst og fremst "
+            "skemmtilegar til að skoða — ekki tölfræðilega marktækar.",
+            icon="⚠️",
+        )
+
+    # ------- 1. Top-1 framboð: bar chart -------
+    st.divider()
+    st.markdown("### 🥇 Hvaða framboð kemur oftast efst?")
+    counts = submissions.fetch_top1_counts()
+    if counts:
+        try:
+            import plotly.express as px
+            df = pd.DataFrame(counts)
+            df = df.sort_values("n", ascending=False)
+            df["litur"] = df["list_letter"].map(lambda c: PARTIES[c]["color"] if c in PARTIES else "#6b7a99")
+            fig = px.bar(
+                df, x="party_name", y="n",
+                color="list_letter",
+                color_discrete_map={c: PARTIES[c]["color"] for c in df["list_letter"] if c in PARTIES},
+                labels={"party_name": "Framboð", "n": "Fjöldi sem fékk það efst"},
+                text="n",
+            )
+            fig.update_layout(showlegend=False, height=380, margin=dict(l=10, r=10, t=20, b=10))
+            fig.update_traces(textposition="outside")
+            st.plotly_chart(fig, use_container_width=True)
+        except ImportError:
+            st.dataframe(pd.DataFrame(counts), hide_index=True, use_container_width=True)
+    else:
+        st.caption("Engin gögn ennþá.")
+
+    # ------- 2. Persónugerð × framboð -------
+    st.divider()
+    st.markdown("### 🧠 Persónugerð × efsta framboð")
+    st.caption(
+        "Hver persónugerð er reiknuð úr svörum við vibe-spurningunum. "
+        "Þetta sýnir hvaða persónugerðir lenda hjá hvaða framboði."
+    )
+    arch_rows = submissions.fetch_archetype_x_party()
+    if arch_rows:
+        # Map archetype_id → label
+        labels = _archetype_label_lookup()
+        for row in arch_rows:
+            row["archetype_label"] = labels.get(row.get("archetype_id"), row.get("archetype_id"))
+        fig = _crosstab_heatmap(
+            arch_rows,
+            row_key="archetype_label",
+            row_label="Persónugerð",
+            col_label="Framboð",
+        )
+        if fig:
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.dataframe(pd.DataFrame(arch_rows), hide_index=True, use_container_width=True)
+    else:
+        st.caption("Engin persónugerðar-gögn ennþá.")
+
+    # ------- 3. Skóstærð × framboð -------
+    st.divider()
+    st.markdown("### 👟 Skóstærð × efsta framboð")
+    st.caption("Hin lengi-langþráða Reykvíska samsvörunarrannsókn. Niðurstaðan er… fyndin.")
+    shoe_rows = submissions.fetch_shoe_x_party()
+    if shoe_rows:
+        # Tryggjum reglulega röð á skóstærðum
+        size_order = ["Undir 36", "36–39", "40–43", "44–46", "Yfir 46", "Vil ekki segja"]
+        for row in shoe_rows:
+            row["_sort"] = size_order.index(row["shoe_size"]) if row["shoe_size"] in size_order else 999
+        shoe_rows.sort(key=lambda r: r["_sort"])
+        fig = _crosstab_heatmap(
+            shoe_rows,
+            row_key="shoe_size",
+            row_label="Skóstærð",
+            col_label="Framboð",
+        )
+        if fig:
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.dataframe(pd.DataFrame(shoe_rows), hide_index=True, use_container_width=True)
+    else:
+        st.caption("Engin skóstærðar-gögn ennþá.")
+
+    # ------- 4. Sundlaug × framboð -------
+    st.divider()
+    st.markdown("### 🏊 Uppáhalds sundlaug × efsta framboð")
+    pool_rows = submissions.fetch_pool_x_party()
+    if pool_rows:
+        fig = _crosstab_heatmap(
+            pool_rows,
+            row_key="laug",
+            row_label="Sundlaug",
+            col_label="Framboð",
+        )
+        if fig:
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.dataframe(pd.DataFrame(pool_rows), hide_index=True, use_container_width=True)
+    else:
+        st.caption("Engin laugar-gögn ennþá.")
+
+    st.divider()
+    st.caption(
+        "📌 Tölfræðilegur fyrirvari: smáar krosstöflur eru ekki marktækar. "
+        "Þetta er fyrst og fremst skemmtilegt yfirlit, ekki vísindarit."
+    )
+
+
+# ---------------------------------------------------------------------------
 # Síða: Aðferðafræði
 # ---------------------------------------------------------------------------
 
@@ -1586,6 +1766,8 @@ elif page == "Samanburður":
     render_comparison()
 elif page == "Stefnu-fylki":
     render_policy_matrix()
+elif page == "Hópgögn":
+    render_aggregates_page()
 elif page == "Aðferðafræði":
     render_methodology()
 
