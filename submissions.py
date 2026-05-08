@@ -126,19 +126,23 @@ def submit_response(
 # RPC-fetch fyrir lifandi tölfræðisíðu
 # ---------------------------------------------------------------------------
 
-def _rpc_call(rpc_name: str, params: dict | None = None):
+def _rest_select(view_or_table: str, params: dict | None = None) -> list | None:
+    """SELECT á view/table í gegnum PostgREST. Aðeins notað fyrir MVs sem hafa
+    `grant select to anon` — engar PII-tengdar töflur."""
     url, key = _supabase_config()
     if not (url and key):
         return None
     try:
         import requests
-        endpoint = f"{url}/rest/v1/rpc/{rpc_name}"
+        endpoint = f"{url}/rest/v1/{view_or_table}"
         headers = {
             "apikey": key,
             "Authorization": f"Bearer {key}",
-            "Content-Type": "application/json",
         }
-        r = requests.post(endpoint, headers=headers, json=params or {}, timeout=8)
+        q = {"select": "*"}
+        if params:
+            q.update(params)
+        r = requests.get(endpoint, headers=headers, params=q, timeout=8)
         if r.ok:
             return r.json()
     except Exception:
@@ -149,35 +153,33 @@ def _rpc_call(rpc_name: str, params: dict | None = None):
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_total() -> int:
     """Heildarfjöldi svara. Cached í 60 sek."""
-    out = _rpc_call("get_total_responses")
-    if isinstance(out, int):
-        return out
+    out = _rest_select("kompas_total_mv")
     if isinstance(out, list) and out:
-        return int(out[0]) if isinstance(out[0], (int, float)) else 0
+        return int(out[0].get("total", 0)) if isinstance(out[0], dict) else 0
     return 0
 
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_top1_counts() -> list[dict]:
-    out = _rpc_call("get_top1_counts")
+    out = _rest_select("kompas_top1_counts_mv", {"order": "n.desc"})
     return out or []
 
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_shoe_x_party() -> list[dict]:
-    out = _rpc_call("get_shoe_x_party")
+    out = _rest_select("kompas_shoe_x_party_mv")
     return out or []
 
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_pool_x_party() -> list[dict]:
-    out = _rpc_call("get_pool_x_party")
+    out = _rest_select("kompas_pool_x_party_mv")
     return out or []
 
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_archetype_x_party() -> list[dict]:
-    out = _rpc_call("get_archetype_x_party")
+    out = _rest_select("kompas_archetype_x_party_mv")
     return out or []
 
 
