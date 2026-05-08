@@ -1024,7 +1024,7 @@ def render_data_collection_section(top3, user_axis):
     )
 
     consented = st.checkbox(
-        "Já, ég samþykki að svar mitt verði geymt **nafnlaust** til greiningar.",
+        "Er í lagi að við geymum svarið þitt **nafnlaust og órekjanlegt** til greiningar?",
         key="consent_checkbox",
     )
 
