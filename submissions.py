@@ -153,7 +153,7 @@ def _rest_select(view_or_table: str, params: dict | None = None) -> list | None:
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_total() -> int:
     """Heildarfjöldi svara. Cached í 60 sek."""
-    out = _rest_select("kompas_total_mv")
+    out = _rest_select("kompas_total")
     if isinstance(out, list) and out:
         return int(out[0].get("total", 0)) if isinstance(out[0], dict) else 0
     return 0
@@ -161,25 +161,25 @@ def fetch_total() -> int:
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_top1_counts() -> list[dict]:
-    out = _rest_select("kompas_top1_counts_mv", {"order": "n.desc"})
+    out = _rest_select("kompas_top1", {"order": "n.desc"})
     return out or []
 
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_shoe_x_party() -> list[dict]:
-    out = _rest_select("kompas_shoe_x_party_mv")
+    out = _rest_select("kompas_shoe_x_party")
     return out or []
 
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_pool_x_party() -> list[dict]:
-    out = _rest_select("kompas_pool_x_party_mv")
+    out = _rest_select("kompas_pool_x_party")
     return out or []
 
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_archetype_x_party() -> list[dict]:
-    out = _rest_select("kompas_archetype_x_party_mv")
+    out = _rest_select("kompas_archetype_x_party")
     return out or []
 
 
