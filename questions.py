@@ -395,6 +395,11 @@ def _axis_balanced_policy(rng: _random.Random, n: int) -> list[dict]:
     return out
 
 
+# Chaos-spurningar sem KEYRA tölfræðisíðuna (Hópgögn). Þær verða alltaf í úrtaki
+# — annars er hætta á að mörg svör vanti pool/shoe gögnin og kassinn standi tómur.
+PINNED_CHAOS_IDS = {"c01_skostaerd", "c02_uppahalds_laug"}
+
+
 def sample_questions(seed: str | int,
                      policy_count: int = 22,
                      personality_count: int = 6,
@@ -412,9 +417,12 @@ def sample_questions(seed: str | int,
     rng.shuffle(pers_pool)
     sampled_personality = pers_pool[:personality_count]
 
-    chaos_pool = list(CHAOS_QUESTIONS)
-    rng.shuffle(chaos_pool)
-    sampled_chaos = chaos_pool[:chaos_count]
+    # Chaos: pinnaðar fyrst (alltaf með), restin valin slembi.
+    pinned = [q for q in CHAOS_QUESTIONS if q["id"] in PINNED_CHAOS_IDS]
+    rest = [q for q in CHAOS_QUESTIONS if q["id"] not in PINNED_CHAOS_IDS]
+    rng.shuffle(rest)
+    extra_count = max(0, chaos_count - len(pinned))
+    sampled_chaos = pinned + rest[:extra_count]
 
     # Interleave eins og _interleave_questions gerir
     out: list[dict] = []
