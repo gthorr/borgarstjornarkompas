@@ -92,11 +92,11 @@ security definer
 set search_path = public
 as $$
 begin
-  delete from public.kompas_total;
+  delete from public.kompas_total where true;
   insert into public.kompas_total (total)
     select count(*)::int from public.kompas_responses where consented = true;
 
-  delete from public.kompas_top1;
+  delete from public.kompas_top1 where true;
   insert into public.kompas_top1 (list_letter, party_name, n)
     select
       top3->0->>'code',
@@ -108,7 +108,7 @@ begin
       and jsonb_array_length(top3) > 0
     group by 1, 2;
 
-  delete from public.kompas_shoe_x_party;
+  delete from public.kompas_shoe_x_party where true;
   insert into public.kompas_shoe_x_party (shoe_size, list_letter, party_name, n)
     select
       answers_chaos->>'c01_skostaerd',
@@ -123,7 +123,7 @@ begin
       and jsonb_array_length(top3) > 0
     group by 1, 2, 3;
 
-  delete from public.kompas_pool_x_party;
+  delete from public.kompas_pool_x_party where true;
   insert into public.kompas_pool_x_party (laug, list_letter, party_name, n)
     select
       answers_chaos->>'c02_uppahalds_laug',
@@ -138,7 +138,7 @@ begin
       and jsonb_array_length(top3) > 0
     group by 1, 2, 3;
 
-  delete from public.kompas_archetype_x_party;
+  delete from public.kompas_archetype_x_party where true;
   insert into public.kompas_archetype_x_party (archetype_id, list_letter, party_name, n)
     select
       unnest(archetype_ids),
