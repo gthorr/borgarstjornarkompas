@@ -469,7 +469,6 @@ with st.sidebar:
                 "Stefnu-fylki",
                 "Hópgögn",
                 "Aðferðafræði",
-                "Upphafssíða",
             ],
             label_visibility="collapsed",
         )
